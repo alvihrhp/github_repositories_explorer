@@ -79,9 +79,14 @@ const App: React.FC = () => {
 
     if (filterSearchResult.isOpen) {
       newResult = searchResult.map((result: Record<string, any>) => {
+        if (id === result.id) {
+          return {
+            ...result,
+            isOpen: false,
+          };
+        }
         return {
           ...result,
-          isOpen: false,
         };
       });
     } else if (
@@ -89,9 +94,14 @@ const App: React.FC = () => {
       filterSearchResult.listRepo.length
     ) {
       newResult = searchResult.map((result: Record<string, any>) => {
+        if (id === result.id) {
+          return {
+            ...result,
+            isOpen: true,
+          };
+        }
         return {
           ...result,
-          isOpen: true,
         };
       });
     } else {
@@ -100,11 +110,14 @@ const App: React.FC = () => {
       );
 
       newResult = searchResult.map((result: Record<string, any>) => {
-        return {
-          ...result,
-          isOpen: true,
-          listRepo: repos,
-        };
+        if (id === result.id) {
+          return {
+            ...result,
+            isOpen: true,
+            listRepo: repos,
+          };
+        }
+        return result;
       });
     }
 
